@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragmets/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <div th:replace="admin/fragmets/header :: header"></div>
+    <!-- =============================================== -->
+    <div th:replace="admin/fragmets/sidebar :: sidebar"></div>
+    <!-- Left side column. contains the sidebar -->
+
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Blank page
+                <small>it all starts here</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Examples</a></li>
+                <li class="active">Blank page</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Quick Example</h3>
+                    </div>
+
+
+                    <form role="form" method="post" th:action="@{/admin/product-add}" th:object="${product}" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Product Name</label>
+                                <input th:field="*{productName}" type="text" class="form-control"
+                                       id="exampleInputEmail1"
+                                       placeholder="Category Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Price</label>
+                                <input th:field="*{price}" type="text" class="form-control"
+                                       placeholder="Price">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Image</label>
+                                <input type="file" class="form-control"
+                                       placeholder="Image" name="fileImage">
+                            </div>
+                            <div class="form-group">
+                                <label>Disabled</label>
+                                <select th:field="*{category.id}" class="form-control select2 select2-hidden-accessible"
+                                        style="width: 100%;" data-select2-id="4" tabindex="-1" aria-hidden="true">
+                                    <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.categoryName}">Alaska</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Description</label>
+                                <textarea th:field="*{description}"  name="editor1" id="editor1" rows="10" cols ="80">
+                                    This is my textarea
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <div th:replace="admin/fragmets/footer :: footer"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+
+<div th:replace="admin/fragmets/script :: script"></div>
+<script src="//cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+</script>
+</body>
+</html>
