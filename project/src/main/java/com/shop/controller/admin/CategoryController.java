@@ -3,6 +3,8 @@ package com.shop.controller.admin;
 import com.shop.model.Category;
 import com.shop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +17,15 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
     @GetMapping("/category")
-    public String index(Model model){
-        List<Category> listCategory = this.categoryService.getAll();
+    public String index(Model model,@Param("keyword") String keyword ,@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo){
+        Page<Category> listCategory = this.categoryService.getAll(pageNo);
+        if(keyword != null){
+            listCategory = categoryService.searchCategory(keyword,pageNo);
+            model.addAttribute("keyword" ,keyword);
+        }
+        int toltal = listCategory.getTotalPages();
+        model.addAttribute("totalPage",listCategory.getTotalPages());
+        model.addAttribute("currentPage" ,pageNo);
         model.addAttribute("listCategory",listCategory);
         return "admin/category/index";
     }
