@@ -53,7 +53,7 @@ public class ProductController {
     }
 
     @GetMapping("/product-delete")
-    public String delete(@RequestParam("id") int id) {
+    public String delete(@RequestParam("id") Long id) {
         storageService.delete(id);
         if (productService.delete(id)) {
             return "redirect:/admin/product";
@@ -64,7 +64,7 @@ public class ProductController {
     }
 
     @GetMapping("/product-update")
-    public String update(Model model, @RequestParam("id") int id) {
+    public String update(Model model, @RequestParam("id") Long id) {
         Product product = productService.find(id);
         model.addAttribute("product", product);
         List<Category> listCategory = categoryService.getAll();

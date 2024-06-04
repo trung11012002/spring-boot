@@ -6,6 +6,7 @@ import com.shop.service.ProductService;
 import com.shop.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public Boolean create(Product product) {
         try {
             this.productRepository.save(product);
@@ -31,11 +33,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product find(Integer id) {
+    public Product find(Long id) {
         return productRepository.findById(id).get();
     }
 
     @Override
+    @Transactional
     public Boolean update(Product product) {
         Product oldProduct = productRepository.findById(product.getId()).get();
         if (product.getImage() == null) {
@@ -51,7 +54,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Boolean delete(Integer id) {
+    @Transactional
+    public Boolean delete(Long id) {
         try {
             this.productRepository.deleteById(id);
             return true;

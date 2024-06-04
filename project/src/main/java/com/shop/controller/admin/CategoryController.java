@@ -46,7 +46,7 @@ public class CategoryController {
 
     }
     @GetMapping("/category-edit")
-    public String update(Model model, @RequestParam("id") int id){
+    public String update(Model model, @RequestParam("id") Long id){
         Category category = categoryService.findById(id);
         model.addAttribute("category" ,category);
         return "admin/category/edit";
@@ -61,7 +61,7 @@ public class CategoryController {
 
     }
     @GetMapping("/category-delete")
-    public String detele(@RequestParam("id") int id){
+    public String detele(@RequestParam("id") Long id){
         if(categoryService.delete(id)){
             return "redirect:/admin/category";
         }else{

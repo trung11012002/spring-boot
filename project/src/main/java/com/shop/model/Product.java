@@ -2,13 +2,12 @@ package com.shop.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "products")
-public class Product {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Product extends Base{
+
     @Column(name = "productName")
     private String productName;
     @Column(name = "price")
@@ -22,25 +21,11 @@ public class Product {
     @JoinColumn(name = "categoryId",referencedColumnName = "id")
     private Category category;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItem> cartItems;
+
     public Product() {
         // TODO Auto-generated constructor stub
-    }
-
-    public Product(Integer id, String productName, Double price, String image, String description, Category category) {
-        this.id = id;
-        this.productName = productName;
-        this.price = price;
-        this.image = image;
-        this.description = description;
-        this.category = category;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getProductName() {

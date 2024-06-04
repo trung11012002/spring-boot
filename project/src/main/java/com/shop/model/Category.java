@@ -6,30 +6,19 @@ import java.util.Set;
 
 @Entity
 @Table(name = "categories")
-public class Category {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Category extends Base{
     @Column(name =  "categoryName")
     private String categoryName;
     @Column(name = "categoryStatus")
     private Boolean categoryStatus;
     // thêm phần này
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products;
 
     public Category() {
         // TODO Auto-generated constructor stub
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getCategoryName() {
         return categoryName;

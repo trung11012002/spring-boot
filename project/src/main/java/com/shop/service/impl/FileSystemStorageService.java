@@ -75,7 +75,7 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
         Product product = productService.find(id);
         try {
             Path file = rootLocation.resolve(product.getImage()).normalize().toAbsolutePath();

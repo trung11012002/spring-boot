@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -21,6 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public Boolean create(Category category) {
         try{
             categoryRepository.save(category);
@@ -32,11 +34,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findById(Integer id) {
+    public Category findById(Long id) {
         return categoryRepository.findById(id).get();
     }
 
     @Override
+    @Transactional
     public Boolean update(Category category) {
         try{
             categoryRepository.save(category);
@@ -48,7 +51,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Boolean delete(Integer id) {
+    @Transactional
+    public Boolean delete(Long id) {
         try{
             categoryRepository.deleteById(id);
             return true;

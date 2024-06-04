@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface CategoryRepository extends JpaRepository<Category,Integer> {
+public interface CategoryRepository extends JpaRepository<Category,Long> {
     @Query("SELECT c from Category c where c.categoryName LIKE %?1%")
     List<Category> searchCategory(String keyword);
 }

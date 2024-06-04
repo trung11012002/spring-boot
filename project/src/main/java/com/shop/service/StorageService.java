@@ -7,5 +7,5 @@ public interface StorageService {
     String store(MultipartFile file);
 
     void deleteAll();
-    void delete(int id);
+    void delete(Long id);
 }

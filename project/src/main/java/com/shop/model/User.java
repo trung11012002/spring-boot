@@ -3,14 +3,12 @@ package com.shop.model;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends Base{
+
     @Column(name = "username")
     private String userName;
     @Column(name = "password")
@@ -30,30 +28,12 @@ public class User {
 
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private Set<UserRole> userRoles;
-
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    private Set<Order> orders;
     public User() {
     }
-
-    public User(Long id, String userName, String passWord, Boolean enabled, String fullName, Boolean gender, String address, String email, String telephone, Set<UserRole> userRoles) {
-        this.id = id;
-        this.userName = userName;
-        this.passWord = passWord;
-        this.enabled = enabled;
-        this.fullName = fullName;
-        this.gender = gender;
-        this.address = address;
-        this.email = email;
-        this.telephone = telephone;
-        this.userRoles = userRoles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Cart> carts;
 
     public String getUserName() {
         return userName;
@@ -125,5 +105,13 @@ public class User {
 
     public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

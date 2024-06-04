@@ -8,9 +8,9 @@ import java.util.List;
 public interface CategoryService {
     public List<Category> getAll();
     public Boolean create(Category category);
-    public Category findById(Integer id);
+    public Category findById(Long id);
     public Boolean update(Category category);
-    public Boolean delete(Integer id);
+    public Boolean delete(Long id);
     List<Category> searchCategory(String keyword);
     Page<Category> getAll(Integer pageNo);
     Page<Category> searchCategory(String keyword ,Integer pageNo);
