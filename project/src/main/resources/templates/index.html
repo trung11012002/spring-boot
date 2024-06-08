@@ -94,50 +94,55 @@
                      aria-labelledby="top-all-link">
                     <div class="products">
                         <div class="row justify-content-center">
-
                             <div th:each="product : ${listProduct}" class="col-6 col-md-4 col-lg-3 col-xl-5col">
-                                    <div class="product product-11 text-center">
-                                        <figure class="product-media">
-                                            <a href="#">
-                                                <img th:src="@{'/uploads/'+${product.image}}" alt="Product image"
-                                                     class="product-image">
-                                                <img th:src="@{'/uploads/'+${product.image}}" alt="Product image"
-                                                     class="product-image-hover">
-                                            </a>
+                                <div class="product product-11 text-center">
+                                    <figure class="product-media">
+                                        <a href="#" id="view-product-detail" th:data-product-id="${product.id}">
+                                            <img th:src="@{'/uploads/'+${product.image}}" alt="Product image"
+                                                 class="product-image">
+                                            <img th:src="@{'/uploads/'+${product.image}}" alt="Product image"
+                                                 class="product-image-hover">
+                                        </a>
+                                        <div class="product-action-vertical">
+                                            <a href="#"
+                                               class="btn-product-icon btn-wishlist"><span>add to wishlist</span></a>
+                                        </div>
+                                    </figure>
+                                    <div class="product-body">
+                                        <h3 class="product-title" th:text="${product.productName}"></h3>
+                                        <div class="product-price" th:text="${product.price} + ' vnđ'">$401,00</div>
+                                    </div>
+                                    <div class="product-action">
+                                        <button type="button" id="addProductToCart" th:data-product-id="${product.id}"
+                                                class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="productDetailModal" tabindex="-1" role="dialog" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productDetailModalLabel">Chi tiết sản phẩm</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Nội dung chi tiết sản phẩm sẽ được cập nhật ở đây -->
+                            <div id="productDetailContent"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                            <div class="product-action-vertical">
-                                                <a href="#"
-                                                   class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
-                                            </div><!-- End .product-action-vertical -->
-                                        </figure><!-- End .product-media -->
 
-                                        <div class="product-body">
-                                            <!--                                        <div class="product-cat">-->
-                                            <!--                                            <a href="#">Lighting</a>-->
-                                            <!--                                        </div>&lt;!&ndash; End .product-cat &ndash;&gt;-->
-                                            <h3 class="product-title"><a href="product.html"
-                                                                         th:text="${product.productName}"></a></h3>
-                                            <!-- End .product-title -->
-                                            <div class="product-price" th:text="${product.price} + ' vnđ'">
-                                                $401,00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-
-                                        <div class="product-action">
-                                            <!--                                        <div >-->
-                                            <!--                                            <a href="#" class="btn-product btn-cart"><span>Mua</span></a>-->
-                                            <!--                                        </div>-->
-                                            <!--                                        <br>-->
-                                            <button type="button" id="addProductToCart" th:data-product-id="${product.id}"
-                                               class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></button>
-                                        </div><!-- End .product-action -->
-                                    </div><!-- End .product -->
-                            </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                        </div><!-- End .row -->
-                    </div><!-- End .products -->
-                </div><!-- .End .tab-pane -->
-            </div><!-- End .tab-content -->
         </div><!-- End .container -->
 
         <div class="container">
@@ -222,7 +227,7 @@
                                 <li><a href="product-category-boxed.html">Product Category Boxed</a></li>
                                 <li><a href="product-category-fullwidth.html"><span>Product Category Fullwidth<span
                                         class="tip tip-new">New</span></span></a></li>
-                                <li><a href="cart.html">Cart</a></li>
+                                <li><a href="layout/cart/cart">Cart</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
                                 <li><a href="#">Lookbook</a></li>
@@ -495,10 +500,13 @@
 <!-- Main JS File -->
 <script th:src="@{/fe/js/main.js}"></script>
 <script th:src="@{/fe/js/demos/demo-2.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <script>
-    $(document).ready(function() {
-        $(document).on("click", "#addProductToCart", function(event) {
-            event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
+    $(document).ready(function () {
+        $(document).on("click", "#addProductToCart", function (event) {
+            event.preventDefault();
 
             var productId = $(this).data("product-id");
             console.log("Product ID: " + productId); // Kiểm tra giá trị productId
@@ -507,19 +515,55 @@
                 url: '/cart/add-product',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ productId: productId }),
+                data: JSON.stringify({productId: productId}),
                 dataType: 'json',
-                success: function(response) {
+                success: function (response) {
                     console.log('Success:', response);
-                    window.location.href = '/admin/category';
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Sản phẩm đã được thêm vào giỏ hàng.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error('Error:', error);
+                    window.location.href = '/logon';
                 }
             });
         });
     });
 </script>
+
+<script>
+    $(document).on("click", "#view-product-detail", function(event) {
+        event.preventDefault();
+
+        var productId = $(this).data("product-id");
+        $("#productDetailModal").modal('hide');
+        $.ajax({
+            url: '/product/detail?productId=' + productId ,
+            type: 'GET',
+            dataType: 'json',
+            success: function(product) {
+                var content = '<h4>' + product.productName + '</h4>' +
+                    '<p>Giá: ' + product.price + ' vnđ</p>' +
+                    '<img src="/uploads/' + product.image + '" alt="Product image" class="img-fluid">' +
+                    '<p>' + product.description + '</p>';
+                $("#productDetailContent").html(content);
+                $("#productDetailModal").modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+    $("#productDetailModal").on('hidden.bs.modal', function () {
+        // Xóa nội dung modal khi modal được đóng
+        $("#productDetailContent").html('');
+    });
+</script>
+
 </body>
 
 </html>

@@ -10,4 +10,6 @@ public interface CartService {
     Boolean create(Cart cart);
     Cart findById(Long id);
     List<Cart> findByUserId(Long userId);
+    List<Cart> getAll();
+    Cart getCartNowByUserId();
 }

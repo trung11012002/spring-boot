@@ -2,7 +2,6 @@ package com.shop.service.impl;
 
 import com.shop.model.Cart;
 import com.shop.model.CartItem;
-import com.shop.model.Product;
 import com.shop.model.User;
 import com.shop.repository.CartItemRepository;
 import com.shop.service.CartItemService;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CartItemImpl implements CartItemService {
+public class CartItemServiceImpl implements CartItemService {
     @Autowired
     CartItemRepository cartItemRepository;
     @Autowired

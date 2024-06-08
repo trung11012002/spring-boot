@@ -16,7 +16,8 @@ public class Product extends Base{
     private String image;
     @Column(name = "description" ,columnDefinition = "TEXT")
     private String description;
-
+    @Column(name = "quantity")
+    private Integer quantity;
     @ManyToOne
     @JoinColumn(name = "categoryId",referencedColumnName = "id")
     private Category category;
@@ -68,5 +69,19 @@ public class Product extends Base{
         this.category = category;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
 
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Set<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
 }

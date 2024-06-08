@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Controller
+@Controller(value = "productControllerOfAdmin")
 @RequestMapping("/admin")
 public class ProductController {
     @Autowired
