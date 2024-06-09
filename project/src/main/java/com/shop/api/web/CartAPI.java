@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController(value = "cartAPIOfWeb")
@@ -47,6 +48,16 @@ public class CartAPI {
         } catch (Exception e) {
             responseBody.put("message", "An error occurred while adding product to cart");
             return ResponseEntity.status(500).body(responseBody);
+        }
+    }
+    @PostMapping("/cart/update")
+    public ResponseEntity<List<CartItem>> cartUpdate(@RequestBody Map<String, List<CartItem>> request) {
+        try {
+            List<CartItem> cartItems = request.get("cartItems");
+            cartItemService.update(cartItems);
+            return ResponseEntity.ok(cartItems);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
         }
     }
 }

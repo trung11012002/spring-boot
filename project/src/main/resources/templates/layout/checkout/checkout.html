@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 
-<!-- Mirrored from portotheme.com/html/molla/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jan 2024 02:58:24 GMT -->
+<!-- Mirrored from portotheme.com/html/molla/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jan 2024 02:58:24 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
 <head>
@@ -16,14 +16,14 @@
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" th:href="@{/fe/images/icons/apple-touch-icon.png}">
     <link rel="icon" type="image/png" sizes="32x32" th:href="@{/fe/images/icons/favicon-32x32.png}">
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{fe/images/icons/favicon-16x16.png}">
-    <link rel="manifest" th:href="@{/fe/images/icons/site.html} ">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/fe/images/icons/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/fe/images/icons/site.html}">
     <link rel="mask-icon" th:href="@{/fe/images/icons/safari-pinned-tab.svg}" color="#666666">
     <link rel="shortcut icon" th:href="@{/fe/images/icons/favicon.ico}">
     <meta name="apple-mobile-web-app-title" content="Molla">
     <meta name="application-name" content="Molla">
     <meta name="msapplication-TileColor" content="#cc9966">
-    <!--    <meta name="msapplication-config" content="/fe/images/icons/browserconfig.xml">-->
+    <meta name="msapplication-config" content="fe/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <!-- Plugins CSS File -->
     <link rel="stylesheet" th:href="@{/fe/css/bootstrap.min.css}">
@@ -37,7 +37,7 @@
         <div class="header-top">
             <div class="container">
                 <div class="header-left">
-                    <div class="header-dropdxown">
+                    <div class="header-dropdown">
                         <a href="#">Usd</a>
                         <div class="header-menu">
                             <ul>
@@ -86,7 +86,7 @@
                     </button>
 
                     <a href="index.html" class="logo">
-                        <img th:src="@{/fe/images/logo.png}" alt="Molla Logo" width="105" height="25">
+                        <img src="fe/images/logo.png" alt="Molla Logo" width="105" height="25">
                     </a>
 
                     <nav class="main-nav">
@@ -357,7 +357,7 @@
                                         <div class="col-md-4">
                                             <div class="banner banner-overlay">
                                                 <a href="category.html" class="banner banner-menu">
-                                                    <img th:src="@{/fe/images/menu/banner-1.jpg}" alt="Banner">
+                                                    <img src="fe/images/menu/banner-1.jpg" alt="Banner">
 
                                                     <div class="banner-content banner-content-top">
                                                         <div class="banner-title text-white">Last
@@ -395,7 +395,7 @@
                                         <div class="col-md-6">
                                             <div class="banner banner-overlay">
                                                 <a href="category.html">
-                                                    <img th:src="@{/fe/images/menu/banner-2.jpg}" alt="Banner">
+                                                    <img src="fe/images/menu/banner-2.jpg" alt="Banner">
 
                                                     <div class="banner-content banner-content-bottom">
                                                         <div class="banner-title text-white">New
@@ -560,7 +560,7 @@
 
                                     <figure class="product-image-container">
                                         <a href="product.html" class="product-image">
-                                            <img th:src="@{/fe/images/products/cart/product-1.jpg}" alt="product">
+                                            <img src="fe/images/products/cart/product-1.jpg" alt="product">
                                         </a>
                                     </figure>
                                     <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
@@ -580,7 +580,7 @@
 
                                     <figure class="product-image-container">
                                         <a href="product.html" class="product-image">
-                                            <img th:src="@{/fe/images/products/cart/product-2.jpg}" alt="product">
+                                            <img src="fe/images/products/cart/product-2.jpg" alt="product">
                                         </a>
                                     </figure>
                                     <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
@@ -608,7 +608,7 @@
     <main class="main">
         <div class="page-header text-center" style="background-image: url('fe/images/page-header-bg.jpg')">
             <div class="container">
-                <h1 class="page-title">Shopping Cart<span>Shop</span></h1>
+                <h1 class="page-title">Checkout<span>Shop</span></h1>
             </div><!-- End .container -->
         </div><!-- End .page-header -->
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -616,106 +616,83 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
                 </ol>
             </div><!-- End .container -->
         </nav><!-- End .breadcrumb-nav -->
 
         <div class="page-content">
-            <div class="cart">
+            <div class="checkout">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <table class="table table-cart table-mobile">
-                                <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
+                    <div class="checkout-discount">
+                        <form action="#">
+                            <input type="text" class="form-control" required id="checkout-discount-input">
+                            <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
+                        </form>
+                    </div><!-- End .checkout-discount -->
+                    <form id="formSubmit" th:action="@{/order}" method="post" th:object="${order}" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Name *</label>
+                                        <input th:field="*{name}" type="text" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+                                </div><!-- End .row -->
 
-                                <tbody>
-                                <tr th:each="cartItem : ${cart.cartItems}">
-                                    <td class="product-col">
-                                        <div class="product">
-                                            <figure class="product-media">
-                                                <a href="#">
-                                                    <img th:src="@{'/uploads/' + ${cartItem.product.image}}"
-                                                         alt="Product image">
-                                                </a>
-                                            </figure>
+                                <label>Address</label>
+                                <input th:field="*{address}" type="text" class="form-control" required>
 
-                                            <h3 class="product-title" th:text="${cartItem.product.productName}">
 
-                                            </h3><!-- End .product-title -->
-                                        </div><!-- End .product -->
-                                    </td>
-                                    <td th:data-price="${cartItem.product.price}" class="price-col"
-                                        th:text="${cartItem.product.price}">$84.00
-                                    </td>
-                                    <td class="quantity-col">
-                                        <div class="cart-product-quantity cart-product-quantity-input"
-                                             th:data-cart-item-id="${cartItem.id}">
-                                            <input type="number" class="form-control" th:value="${cartItem.quantity}"
-                                                   min="1"
-                                                   th:max="${cartItem.product.quantity}" step="1" data-decimals="0"
-                                                   required>
-                                        </div><!-- End .cart-product-quantity -->
-                                    </td>
-                                    <td class="total-col" th:text="${cartItem.product.price*cartItem.quantity}">
-                                        $84.00
-                                    </td>
-                                    <td class="remove-col">
-                                        <button class="btn-remove"><i class="icon-close"></i></button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table><!-- End .table table-wishlist -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Phone Number</label>
+                                        <input th:field="*{phoneNumber}" type="text" class="form-control" required>
+                                    </div><!-- End .col-sm-6 -->
+                                </div><!-- End .row -->
+                                <label>Order notes (optional)</label>
+                                <textarea th:field="*{note}" class="form-control" cols="30" rows="4"
+                                          placeholder="Notes about your order"></textarea>
+                            </div><!-- End .col-lg-9 -->
+                            <aside class="col-lg-3">
+                                <div class="summary">
+                                    <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
 
-                            <div class="cart-bottom">
-                                <!--                                    <div class="cart-discount">-->
-                                <!--                                        <form action="#">-->
-                                <!--                                            <div class="input-group">-->
-                                <!--                                                <input type="text" class="form-control" required-->
-                                <!--                                                       placeholder="coupon code">-->
-                                <!--                                                <div class="input-group-append">-->
-                                <!--                                                    <button class="btn btn-outline-primary-2" type="submit"><i-->
-                                <!--                                                            class="icon-long-arrow-right"></i></button>-->
-                                <!--                                                </div>&lt;!&ndash; .End .input-group-append &ndash;&gt;-->
-                                <!--                                            </div>&lt;!&ndash; End .input-group &ndash;&gt;-->
-                                <!--                                    </div>&lt;!&ndash; End .cart-discount &ndash;&gt;-->
+                                    <table class="table table-summary">
+                                        <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                        </tr>
+                                        </thead>
 
-                                <button id="updateCartItem" type="button" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i
-                                        class="icon-refresh"></i></button>
-                            </div><!-- End .cart-bottom -->
-                        </div><!-- End .col-lg-9 -->
-                        <aside class="col-lg-3">
-                            <div class="summary summary-cart">
-                                <h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
+                                        <tbody>
+                                        <tr th:each="cartItem : ${cart.cartItems}">
+                                            <td th:text="${cartItem.product.productName}"></td>
+                                            <td th:text="${cartItem.quantity}"></td>
+                                            <td th:text="${cartItem.quantity * cartItem.product.price}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table><!-- End .table table-summary -->
 
-                                <table class="table table-summary">
-                                    <tbody>
+                                    <div th:text="${'Total: ' + cartTotal}" type="submit"
+                                         class="btn btn-outline-primary-2 btn-order btn-block">
 
-                                    <tr class="summary-total">
-                                        <td>Total:</td>
-                                        <td th:text="${cartTotal}"></td>
-                                    </tr><!-- End .summary-total -->
-                                    </tbody>
-                                </table><!-- End .table table-summary -->
+                                    </div>
 
-                                <a th:href="@{/checkout}" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO
-                                    CHECKOUT</a>
-                            </div><!-- End .summary -->
-
-                            <a href="category.html" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i
-                                    class="icon-refresh"></i></a>
-                        </aside><!-- End .col-lg-3 -->
-                    </div><!-- End .row -->
+                                    <button id="btnCheckout" type="button"
+                                            class="btn btn-outline-primary-2 btn-order btn-block">
+                                        <span class="btn-text">Place Order</span>
+                                        <span class="btn-hover-text">Proceed to Checkout</span>
+                                    </button>
+                                </div><!-- End .summary -->
+                            </aside><!-- End .col-lg-3 -->
+                        </div><!-- End .row -->
+                    </form>
                 </div><!-- End .container -->
-            </div><!-- End .cart -->
+            </div><!-- End .checkout -->
         </div><!-- End .page-content -->
     </main><!-- End .main -->
 
@@ -725,8 +702,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget widget-about">
-                            <img th:src="@{/fe/images/logo.png}" class="footer-logo" alt="Footer Logo" width="105"
-                                 height="25">
+                            <img src="fe/images/logo.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
                             <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna
                                 eros eu erat. </p>
 
@@ -796,7 +772,7 @@
                 <p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p>
                 <!-- End .footer-copyright -->
                 <figure class="footer-payments">
-                    <img th:src="@{/fe/images/payments.png}" alt="Payment methods" width="272" height="20">
+                    <img src="fe/images/payments.png" alt="Payment methods" width="272" height="20">
                 </figure><!-- End .footer-payments -->
             </div><!-- End .container -->
         </div><!-- End .footer-bottom -->
@@ -1106,84 +1082,37 @@
 
 <!-- Plugins JS File -->
 <script th:src="@{/fe/js/jquery.min.js}"></script>
-<script th:src="@{fe/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{fe/js/jquery.hoverIntent.min.js}"></script>
-<script th:src="@{fe/js/jquery.waypoints.min.js}"></script>
-<script th:src="@{fe/js/superfish.min.js}"></script>
-<script th:src="@{fe/js/owl.carousel.min.js}"></script>
-<script th:src="@{fe/js/bootstrap-input-spinner.js}"></script>
+<script th:src="@{/fe/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/fe/js/jquery.hoverIntent.min.js}"></script>
+<script th:src="@{/fe/js/jquery.waypoints.min.js}"></script>
+<script th:src="@{/fe/js/superfish.min.js}"></script>
+<script th:src="@{/fe/js/owl.carousel.min.js}"></script>
 <!-- Main JS File -->
-<script th:src="@{fe/js/main.js}"></script>
+<script th:src="@{/fe/js/main.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    // Xử lý sự kiện khi nhấn nút cộng, nút trừ
-    $(document).on("click", ".btn-increment, .btn-decrement", function (event) {
-        // Lấy số lượng mới của sản phẩm
-        var quantity = parseInt($(this).closest(".cart-product-quantity").find("input").val());
-
-        // Lấy giá của sản phẩm
-        var price = parseFloat($(this).closest(".quantity-col").prev(".price-col").attr("data-price"));
-        // quantity++;
-        // // Cập nhật số lượng mới vào input
-        // $(this).closest(".cart-product-quantity").find("input").val(quantity);
-
-        // Tính toán giá tiền mới
-        var totalPrice = quantity * price;
-
-        // Cập nhật giá tiền mới vào giao diện người dùng
-        $(this).closest(".quantity-col").next(".total-col").text("$" + totalPrice.toFixed(2));
-    });
-
-    $(document).on("click", "#updateCartItem", function (event) {
-        event.preventDefault();
-        var cartItems = [];
-        $(".cart-product-quantity-input").each(function () {
-            var productId = $(this).data("cart-item-id");
-            var quantity = $(this).find("input").val();
-            cartItems.push({id: productId, quantity: quantity});
-        });
-
-        console.log("Cart Items:", cartItems);
-
-        $.ajax({
-            url: '/cart/update',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({cartItems: cartItems}),
-            dataType: 'json',
-            success: function (response) {
-                console.log('Success:', response);
-                Swal.fire({
-                    title: 'Thành công!',
-                    text: 'Giỏ hàng đã được cập nhật.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "/cart";
-                    }else{
-                        window.location.href = "/cart";
-                    }
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Lỗi!',
-                    text: 'Có lỗi xảy ra khi cập nhật giỏ hàng.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
+    $('#btnCheckout').click(function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: "Xác nhận",
+            text: "Xác nhận đơn hàng",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-success",
+            cancelButtonClass: "btn-danger",
+            confirmButtonText: "Xác nhận",
+            cancelButtonText: "Hủy bỏ",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#formSubmit').submit();
             }
         });
     });
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+
 </script>
 </body>
 
 
-<!-- Mirrored from portotheme.com/html/molla/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jan 2024 02:58:24 GMT -->
+<!-- Mirrored from portotheme.com/html/molla/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jan 2024 02:58:25 GMT -->
 </html>

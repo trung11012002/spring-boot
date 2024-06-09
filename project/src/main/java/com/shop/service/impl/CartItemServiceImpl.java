@@ -11,6 +11,7 @@ import com.shop.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class CartItemServiceImpl implements CartItemService {
     @Autowired
     CartService cartService;
     @Override
+    @Transactional
     public Boolean create(CartItem cartItem) {
         UserDetails userDetails = SecurityUtil.getCurrentUser();
         User user = userService.findByUserName(userDetails.getUsername());
@@ -45,6 +47,22 @@ public class CartItemServiceImpl implements CartItemService {
 
         try{
             cartItemRepository.save(cartItem);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public Boolean update(List<CartItem> cartItems) {
+        try{
+            for(CartItem item : cartItems){
+                CartItem cartItem = cartItemRepository.findById(item.getId()).get();
+                cartItem.setQuantity(item.getQuantity());
+                cartItemRepository.save(cartItem);
+            }
             return true;
         }catch (Exception e){
             e.printStackTrace();

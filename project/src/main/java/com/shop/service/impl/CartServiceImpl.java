@@ -1,6 +1,8 @@
 package com.shop.service.impl;
 
 import com.shop.model.Cart;
+import com.shop.model.CartItem;
+import com.shop.model.Product;
 import com.shop.model.User;
 import com.shop.repository.CartRepository;
 import com.shop.service.CartService;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -49,7 +53,20 @@ public class CartServiceImpl implements CartService {
         UserDetails userDetails = SecurityUtil.getCurrentUser();
         User user = userService.findByUserName(userDetails.getUsername());
         List<Cart> listCart= cartRepository.findByUserId(user.getId());
-        return listCart.get(listCart.size()-1);
+        Cart cart =  listCart.get(listCart.size()-1);
+        List<CartItem> cartItems = (List<CartItem>) cart.getCartItems();
+        Collections.sort(cartItems, Comparator.comparingLong(CartItem::getId).reversed());
+        cart.setCartItems(cartItems);
+        return cart;
+    }
+
+    @Override
+    public Double cartTotal(Cart cart) {
+        double sum = 0L;
+        for(CartItem item : cart.getCartItems()){
+            sum+= (item.getQuantity() * item.getProduct().getPrice());
+        }
+        return sum;
     }
 
 

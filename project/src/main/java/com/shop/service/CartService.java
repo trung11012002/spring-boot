@@ -12,4 +12,5 @@ public interface CartService {
     List<Cart> findByUserId(Long userId);
     List<Cart> getAll();
     Cart getCartNowByUserId();
+    Double cartTotal(Cart cart);
 }

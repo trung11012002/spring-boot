@@ -33,9 +33,11 @@ public class CartController {
         try{
             Cart cart = cartService.getCartNowByUserId();
             model.addAttribute("cart",cart);
+            model.addAttribute("cartTotal" , cartService.cartTotal(cart));
             return "layout/cart/cart";
         }catch (Exception e){
             return "admin/logon";
         }
     }
+
 }
