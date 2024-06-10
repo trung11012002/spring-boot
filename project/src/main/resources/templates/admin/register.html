@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Đăng Ký</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Đăng Ký</h4>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/register}" method="post" th:object="${user}">
+                        <div class="form-group">
+                            <label for="fullname">Tên người dùng</label>
+                            <input th:field="*{fullName}" type="text" class="form-control" id="fullname"
+                                   placeholder="Nhập tên người dùng">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập</label>
+                            <input th:field="*{userName}" type="text" class="form-control" id="username"
+                                   placeholder="Nhập tên người dùng">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input th:field="*{passWord}" type="password" class="form-control" id="password"
+                                   placeholder="Nhập mật khẩu">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Xác nhận mật khẩu</label>
+                            <input type="password" class="form-control" id="confirm-password"
+                                   placeholder="Nhập lại mật khẩu">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Số điện thoại</label>
+                            <input th:field="*{telephone}" type="text" class="form-control" id="phoneNumber"
+                                   placeholder="Nhập số điện thoại">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Đăng Ký</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <small>Đã có tài khoản? <a th:href="@{/logon}">Đăng nhập</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    /* Lấy thông báo từ model */
+    var message = /*[[${message}]]*/ 'null';
+    var messageType = /*[[${messageType}]]*/ 'null';
+
+    /* Nếu có thông báo, hiển thị SweetAlert */
+    if (message.length > 0 && messageType.length > 0) {
+        Swal.fire({
+            title: messageType === 'success' ? 'Success!' : 'Error!',
+            text: message,
+            icon: messageType,
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/logon";
+            }else{
+                window.location.href = "/logon";
+            }
+        });
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

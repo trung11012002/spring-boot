@@ -114,4 +114,12 @@ public class User extends Base{
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
+
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
 }

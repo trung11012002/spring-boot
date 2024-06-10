@@ -11,6 +11,7 @@ import com.shop.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,6 +24,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private UserService userService;
     @Override
+    @Transactional
     public Boolean create(Cart cart) {
         try{
             cartRepository.save(cart);

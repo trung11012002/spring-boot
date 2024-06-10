@@ -36,7 +36,7 @@ public class CartController {
             model.addAttribute("cartTotal" , cartService.cartTotal(cart));
             return "layout/cart/cart";
         }catch (Exception e){
-            return "admin/logon";
+            return "redirect:/logon";
         }
     }
 
