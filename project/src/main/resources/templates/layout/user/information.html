@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/fragmets/head :: head"></head>
+<body>
+<header th:replace="layout/fragmets/header :: header"></header>
+
+<main class="main">
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title" th:text="${user.userName}"></h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#" th:href="@{/change-password}" class="text-decoration-none">Thay đổi mật khẩu</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Thông tin cá nhân</h5>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/user-update}" method="post" th:object="${user}">
+                            <input type="hidden" th:field="*{id}">
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label">Họ và tên</label>
+                                <input th:field="*{fullName}" type="text" class="form-control" id="fullName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input th:field="*{email}" type="email" class="form-control" id="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input th:field="*{telephone}" type="text" class="form-control" id="phone" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Địa chỉ</label>
+                                <textarea th:field="*{address}" class="form-control" id="address" rows="3" ></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Chỉnh sửa thông tin</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout/fragmets/footer :: footer"></footer>
+
+<script th:src="@{/fe/js/jquery.min.js}"></script>
+<script th:src="@{/fe/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    /* Lấy thông báo từ model */
+    var message = /*[[${message}]]*/ 'null';
+    var messageType = /*[[${messageType}]]*/ 'null';
+
+    /* Nếu có thông báo, hiển thị SweetAlert */
+    if (message.length > 0 && messageType.length > 0) {
+        Swal.fire({
+            title: messageType === 'success' ? 'Success!' : 'Error!',
+            text: message,
+            icon: messageType,
+            confirmButtonText: 'OK'
+        });
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

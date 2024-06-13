@@ -25,7 +25,8 @@ public class User extends Base{
     private String email;
     @Column(name = "telephone")
     private String telephone;
-
+    @Column(name = "code")
+    private String code;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private Set<UserRole> userRoles;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
@@ -121,5 +122,13 @@ public class User extends Base{
 
     public void setCarts(List<Cart> carts) {
         this.carts = carts;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

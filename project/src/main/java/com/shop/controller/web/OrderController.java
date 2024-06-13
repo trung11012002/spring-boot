@@ -36,4 +36,9 @@ public class OrderController {
             return "redirect:/logon";
         }
     }
+    @GetMapping("/list-order")
+    public String listOder(Model model){
+        model.addAttribute("listOrder" , orderService.getByUserId());
+        return  "layout/order/order";
+    }
 }

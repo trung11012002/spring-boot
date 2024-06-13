@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/fragmets/head :: head"></head>
+<body>
+<header th:replace="layout/fragmets/header :: header"></header>
+
+<main class="main">
+    <div class="container">
+        <h1 class="mt-4 mb-4">Danh sách đơn hàng</h1>
+        <div th:if="${listOrder != null}">
+            <div th:each="order : ${listOrder}" class="card mb-3">
+                <div class="card-header">
+                    <a href="#" th:onclick="'toggleOrderDetails(' + ${order.id} + ')'" th:text="'Đơn hàng ngày: ' + ${order.createdDate}"></a>
+                </div>
+                <div class="card-body" th:id="'order-details-' + ${order.id}" style="display: none;">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Hình ảnh</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        </thead>
+                        <tbody th:with="cart = ${order.cart}">
+                        <tr th:each="cartItem : ${cart.cartItems}">
+                            <td th:text="${cartItem.product.productName}">Tên sản phẩm</td>
+                            <td th:text="${cartItem.quantity}">Số lượng</td>
+                            <td th:text="${cartItem.product.price}">Giá</td>
+                            <td><img th:src="@{'uploads/' + ${cartItem.product.image}}" style="width: 50px"></td>
+                            <td th:if="${order.statusOrder == true}">Đã duyệt</td>
+                            <td th:if="${order.statusOrder == false}">Chờ duyệt</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div th:if="${listOrder == null || listOrder.isEmpty()}">
+            <p>Không có đơn hàng nào.</p>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout/fragmets/footer :: footer"></footer>
+
+<script th:src="@{/fe/js/jquery.min.js}"></script>
+<script th:src="@{/fe/js/bootstrap.bundle.min.js}"></script>
+<script>
+    function toggleOrderDetails(orderId) {
+        var detailsElement = document.getElementById('order-details-' + orderId);
+        if (detailsElement.style.display === 'none') {
+            detailsElement.style.display = 'block';
+        } else {
+            detailsElement.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

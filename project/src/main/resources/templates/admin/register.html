@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                            <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="Nhập email">
                         </div>
                         <div class="form-group">
                             <label for="phoneNumber">Số điện thoại</label>
@@ -77,9 +77,10 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = "/logon";
-            }else{
-                window.location.href = "/logon";
             }
+            // else{
+            //     window.location.href = "/logon";
+            // }
         });
     }
     /*]]>*/

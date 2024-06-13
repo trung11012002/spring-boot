@@ -1,0 +1,66 @@
+<header class="header header-2 header-intro-clearance" th:fragment = "header">
+  <div class="header-top">
+    <div class="container">
+      <div class="header-left">
+      </div><!-- End .header-left -->
+      <div class="header-right">
+        <ul class="top-menu">
+          <li>
+            <a href="#">Links</a>
+            <ul>
+              <!-- Hiển thị nếu người dùng chưa đăng nhập -->
+              <li th:if="${#authentication.name == 'anonymousUser'}"><a th:href="@{/logon}">Đăng nhập</a></li>
+              <li th:if="${#authentication.name == 'anonymousUser'}"><a th:href="@{/register}">Đăng ký</a></li>
+
+              <!-- Hiển thị nếu người dùng đã đăng nhập -->
+              <li th:if="${#authentication.name != 'anonymousUser'}">
+                <a th:text="'Chào, ' + ${#authentication.name}"></a>
+              </li>
+              <li th:if="${#authentication.name != 'anonymousUser'}">
+                <a th:href="@{/logout}">Đăng xuất</a>
+              </li>
+            </ul>
+          </li>
+        </ul><!-- End .top-menu -->
+      </div><!-- End .header-right -->
+
+
+
+    </div><!-- End .container -->
+  </div><!-- End .header-top -->
+
+  <div class="header-middle">
+    <div class="container">
+      <div class="header-left">
+        <button class="mobile-menu-toggler">
+          <span class="sr-only">Toggle mobile menu</span>
+          <i class="icon-bars"></i>
+        </button>
+
+        <a th:href="@{/}" class="logo">
+          <img th:src="@{/fe/images/demos/demo-2/logo.png}" alt="Molla Logo" width="105" height="25">
+        </a>
+      </div><!-- End .header-left -->
+      <div class="header-right">
+        <div class="account">
+          <a th:href="@{/user-information}" title="My account">
+            <div class="icon">
+              <i class="icon-user"></i>
+            </div>
+            <p>Tài khoản</p>
+          </a>
+        </div><!-- End .compare-dropdown -->
+        <div class="dropdown cart-dropdown">
+          <a th:href="@{/cart}" class="dropdown-toggle">
+            <div class="icon">
+              <i class="icon-shopping-cart"></i>
+              <span class="cart-count"></span>
+            </div>
+            <p>Cart</p>
+          </a>
+        </div><!-- End .cart-dropdown -->
+      </div><!-- End .header-right -->
+    </div><!-- End .container -->
+  </div><!-- End .header-middle -->
+
+</header><!-- End .header -->

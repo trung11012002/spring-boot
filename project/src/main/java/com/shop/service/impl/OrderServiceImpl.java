@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
@@ -43,5 +45,12 @@ public class OrderServiceImpl implements OrderService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Order> getByUserId() {
+        UserDetails userDetails = SecurityUtil.getCurrentUser();
+        User user = userService.findByUserName(userDetails.getUsername());
+        return orderRepository.findByUserId(user.getId());
     }
 }

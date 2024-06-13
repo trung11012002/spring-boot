@@ -20,6 +20,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                 <a th:href="@{/register}" class="btn btn-primary btn-block">Đăng kí</a>
+                <a th:href="@{/forgot-password}" class="btn btn-primary btn-block">Quên mật khẩu</a>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form>
         </div>
@@ -28,5 +29,36 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hàm lấy giá trị của tham số từ URL
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            let results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Kiểm tra nếu có thông báo lỗi
+        var error = getParameterByName('error');
+        if (error) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Tài khoản hoặc mật khẩu không đúng!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = /*[[@{/logon}]]*/ '/logon';
+                }
+            });
+        }
+    });
+    /*]]>*/
+</script>
 </body>
 </html>
